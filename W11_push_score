@@ -1,0 +1,1 @@
+ rooms[roomId] = { roomName, game_mode, maxPlayers, members: [{ id: userId, team: null, isHost: true }], pushScore: 0 };
