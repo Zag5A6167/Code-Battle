@@ -1,0 +1,7 @@
+ const handleSubmissionCode = () => {
+  
+    if (socket) {
+      socket.emit('submitCode', {
+        problemId: randomProblem._id,
+        code: userCode,
+        roomId: roomId
