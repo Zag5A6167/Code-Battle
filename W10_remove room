@@ -1,0 +1,9 @@
+socket.on('leaveRoom', (roomId, userId) => {
+        const room = rooms[roomId];
+        if (room) {
+            room.members = room.members.filter(m => m.id !== userId);
+            socket.leave(roomId);
+
+  }
+
+}
