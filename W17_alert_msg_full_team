@@ -1,0 +1,8 @@
+   const msgAlert = (msg) => {
+        Swal.fire({
+            icon: 'info',
+            title: 'แจ้งเตือน',
+            text: msg,
+            confirmButtonText: 'ตกลง'
+        })
+    }
