@@ -1,0 +1,30 @@
+const isRoomFull = (room) => {
+    return room.members?.length >= room.maxPlayers;
+  };
+
+  const handleJoinRoom = (roomId, room) => {
+    if (isRoomFull(room)) {
+      Swal.fire({
+        title: 'ห้องเต็ม!',
+        text: 'ขออภัย ห้องนี้มีผู้เล่นเต็มแล้ว',
+        icon: 'warning',
+        confirmButtonText: 'ตกลง',
+        confirmButtonColor: '#3085d6',
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const handleSpectateRoom = (roomId, room) => {
+    if (isRoomFull(room)) {
+      Swal.fire({
+        title: 'เข้าชมการแข่งขัน',
+        text: 'คุณกำลังเข้าสู่โหมดผู้ชม',
+        icon: 'info',
+        confirmButtonText: 'ตกลง',
+        confirmButtonColor: '#3085d6',
+      });
+    }
+    return true;
+  };
