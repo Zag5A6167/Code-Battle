@@ -1,0 +1,50 @@
+  return (
+        <div style={{ padding: '20px' }}>
+            <h1>{roomName}</h1>
+            <p>Players: {members.length} / {maxMembers}</p>
+            <p>Room ID: {roomId}</p>
+            <div style={{ margin: '20px 0' }}>
+                <button onClick={() => handleJoinTeam('Red Team')} style={{ backgroundColor: 'red', color: 'white', marginRight: '10px' }}>เข้าร่วม Red Team</button>
+                <button onClick={() => handleJoinTeam('Blue Team')} style={{ backgroundColor: 'blue', color: 'white' }}>เข้าร่วม Blue Team</button>
+                <h2>โปรดเลือกทีม</h2>
+            </div>
+            
+            <hr style={{ margin: '20px 0' }} />
+
+            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <div style={{ flex: 1, marginRight: '20px' }}>
+                    <h2 style={{ color: 'red' }}>Red Team</h2>
+                    <ul>
+                        {redTeamMembers.map(member => (
+                            <li key={member.id}>{member.id} {member.id === userId && '(You)'}</li>
+                        ))}
+                    </ul>
+                </div>
+                
+                <div style={{ flex: 1 }}>
+                    <h2 style={{ color: 'blue' }}>Blue Team</h2>
+                    <ul>
+                        {blueTeamMembers.map(member => (
+                            <li key={member.id}>{member.id} {member.id === userId && '(You)'}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            
+            <div style={{ marginTop: '20px' }}>
+                <h2>จุดพักรอเลือกทีม</h2>
+                <ul>
+                    {noTeamMembers.map(member => (
+                        <li key={member.id}>{member.id} {member.id === userId}</li>
+                    ))}
+                </ul>
+            </div>
+
+            {isHost && (
+                <div style={{ marginTop: '20px' }}>
+                    <button onClick={handleStartGame} style={{ backgroundColor: 'green', color: 'white' }}>เริ่มเกม</button>
+                </div>
+            )}
+        </div>
+    );
+}
