@@ -1,0 +1,25 @@
+const { socket } = useSocketCtx();
+    const [rooms, setRooms] = useState({});
+
+    useEffect(() => {
+        if (!socket) return;
+        
+        const handleConnect = () => {
+            console.log('Connected to Socket.IO server for lobby!');
+            socket.emit('getRooms');
+        };
+
+        const handleRoomsList = (data) => {
+            if (data && typeof data === 'object') {
+                setRooms(data);
+            }
+        };
+
+        socket.on('connect', handleConnect);
+        socket.on('roomsList', handleRoomsList);
+
+        return () => {
+            socket.off('connect', handleConnect);
+            socket.off('roomsList', handleRoomsList);
+        };
+    }, [socket]);
