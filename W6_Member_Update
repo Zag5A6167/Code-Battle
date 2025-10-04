@@ -1,0 +1,21 @@
+ socket.on('joinRoom', (roomId, userId) => {
+        const room = rooms[roomId];
+
+        if (!room) {
+            return;
+        }
+
+        const roomSockets = io.sockets.adapter.rooms.get(roomId);
+        const currentMembersCount = roomSockets ? roomSockets.size : 0;
+        const game_mode = room.game_mode;
+        const limit = GAME_MODE_LIMITS[game_mode];
+        
+        socket.join(roomId);
+
+        const members = Array.from(io.sockets.adapter.rooms.get(roomId)).map(socketId => {
+            const existingMember = room.members.find(m => m.id === socketId);
+            return existingMember || { id: socketId, team: null };
+        });
+        room.members = members;
+      
+    });
