@@ -1,0 +1,27 @@
+         let timerInterval;
+            Swal.fire({
+                title: 'เกมจะเริ่มในอีก...',
+                html: '<b style="font-size: 40px; color: #dc2626;">5</b> วินาที',
+                timer: 5000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                background: '#ffffff',
+                color: '#000000',
+                didOpen: () => {
+                    const timer = Swal.getPopup().querySelector("b");
+                    let timeLeft = 5;
+
+                    timerInterval = setInterval(() => {
+                        timeLeft--;
+                        timer.textContent = timeLeft;
+                    }, 1000);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    socket.emit('startGame', roomId);
+                }
+            });
