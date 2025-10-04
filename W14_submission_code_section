@@ -1,0 +1,37 @@
+const handleSubmissionCode = async () => {
+    if (!randomProblem._id) {
+      console.error("ไม่สามารถส่งคำตอบได้: ยังไม่มีโจทย์");
+      return;
+    }
+
+    if (!userCode) {
+      console.error("ไม่สามารถส่งคำตอบได้: ยังไม่มีโค้ด");
+      return;
+    }
+
+    const submissionData = {
+      problemId: randomProblem._id,
+      code: userCode
+    };
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/submissions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        console.log("ส่งคำตอบสำเร็จ:", result);
+        alert(userCode);
+      
+      } else {
+        console.error("ส่งคำตอบไม่สำเร็จ:", result.error);
+      }
+    } catch (error) {
+      console.error("เกิดข้อผิดพลาดในการส่งคำตอบ:", error);
+    }
+  };
