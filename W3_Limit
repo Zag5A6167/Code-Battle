@@ -1,0 +1,5 @@
+const GAME_MODE_LIMITS = {
+    '1vs1': 2,
+    '2vs2': 4,
+    '3vs3': 6,
+};
