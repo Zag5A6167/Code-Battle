@@ -1,0 +1,10 @@
+const handleRefreshRooms = () => {
+    console.log('Refresh button clicked!');
+    if (socket) {
+      
+        socket.emit('getRooms');
+    
+    } else {
+      console.log('Socket object is null or undefined.');
+    }
+}
