@@ -1,0 +1,15 @@
+  socket.on('disconnecting', () => {
+        const rooms = Array.from(socket.rooms);
+        if (rooms.length > 1) {
+            const roomId = rooms[1];
+            setTimeout(() => {
+                const roomSockets = io.sockets.adapter.rooms.get(roomId);
+                if (roomSockets && rooms[roomId]) {
+                    const members = Array.from(roomSockets).map(socketId => ({
+                        id: socketId,
+                        team: rooms[roomId]?.members.find(member => member.id === socketId)?.team || null
+                    }));
+                }
+            });
+        }
+    });
